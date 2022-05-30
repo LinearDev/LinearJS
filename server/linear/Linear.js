@@ -1,3 +1,4 @@
+"use strict"
 import { LinearDOM } from './LinearDom.js';
 import * as MainConfig from '../../config/config.js';
 
@@ -20,7 +21,18 @@ class Linear_class {
         return LinearDOM.createElement('title', { children: MainConfig.default.pageTitle });
     }
 
-    useEffect(func, arg) { window.addEventListener('load', func) }
+    setDOM(component) {
+        const main = this.domStructure.querySelector('.___main___');
+        if (String(component.outerHTML)[0] === '<') {
+            main.innerHTML = component.outerHTML;
+        } else if (typeof component === "object") {
+            for (let key in component) {
+                main.appendChild(component[key]);
+            }
+        }
+    }
+
+    useEffect(func, arg) {window.addEventListener('load', func)}
 }
 
 class LinearDOM_class extends Linear_class {
@@ -75,176 +87,6 @@ class LinearDOM_class extends Linear_class {
         }
     }
 
-    div(create, place) {
-        //console.log('Linear.js: Generate "div" element');
-        let div = document.createElement('div');
-        if ('id' in create) {
-            div.id = create.id;
-        }
-        if ('class' in create) {
-            div.className = create.class;
-        }
-        if ('style' in create) {
-            div.style = create.style;
-        }
-        if ('text' in create) {
-            div.innerText = create.text;
-        }
-        if ('html' in create) {
-            div.innerHTML = create.html;
-        }
-        if (place !== '') {
-            let order = 0;
-            if ('order' in place) {
-                order = place.order;
-            }
-            if ('paste' in place) {
-                let block = this.domStructure.querySelectorAll(place.place)[order];
-                block.insertBefore(div, block.lastChild);
-            } else {
-                //document.getElementsByClassName(place['class'])[order].appendChild(div);
-                //console.log(this.domStructure.querySelectorAll(place.place)[order]);
-                this.domStructure.querySelectorAll(place.place)[order].appendChild(div);
-            }
-        }
-    }
-
-    i(create, place) {
-        //console.log('Linear.js: Generate "i" element');
-        let i_elem = document.createElement('i');
-        if ('id' in create) {
-            i_elem.id = create.id;
-        }
-        if ('class' in create) {
-            i_elem.className = create.class;
-        }
-        if (place !== '') {
-            if ('place' in place) {
-                let order = 0;
-                if ('order' in place) {
-                    order = place.order;
-                }
-                LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(i_elem);
-            }
-        }
-    }
-
-    input(create, place) {
-        //console.log('Linear.js: Generate "input" element');
-        let input = document.createElement('input');
-        if ('class' in create) {
-            input.className = create.class;
-        }
-        if ('id' in create) {
-            input.id = create.id;
-        }
-        if ('type' in create) {
-            input.type = create.type;
-        }
-        if ('placeholder' in create) {
-            input.placeholder = create.placeholder;
-        }
-        if ('checked' in create) {
-            input.defaultChecked = true;
-        }
-        if (place !== '') {
-            if ('place' in place) {
-                let order = 0;
-                if ('order' in place) {
-                    order = place['order'];
-                }
-                LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(input);
-            }
-        }
-    }
-
-    h(size, create, place) {
-        //console.log('Linear.js: Generate "h'+size+'" element');
-        let h = document.createElement('h' + size);
-        if ('class' in create) {
-            h.className = create.class;
-        }
-        if ('id' in create) {
-            h.id = create['id'];
-        }
-        if ('innerText' in create) {
-            h.innerText = create.innerText;
-        }
-        if ('style' in create) {
-            h.style.cssText = create.style;
-        }
-        if (place !== '') {
-            if ('place' in place) {
-                let order = 0;
-                if ('order' in place) {
-                    order = place.order;
-                }
-                this.domStructure.querySelectorAll(place.place)[order].appendChild(h);
-            }
-        }
-    }
-
-    button(create, place) {
-        let order = 0;
-        if ('order' in place) {
-            order = place.order;
-        }
-        let button = document.createElement('button');
-        if ('id' in create) {
-            button.id = create.id;
-        }
-        if ('class' in create) {
-            button.className = create.class;
-        }
-        if ('innerText' in create) {
-            button.innerText = create.innerText;
-        }
-
-        if ('onclick' in create) {
-            button.addEventListener('click', create.onclick);
-        }
-
-        if ('place' in place) {
-            this.domStructure.querySelectorAll(place.place)[order].appendChild(button);
-        }
-    }
-
-    label(create, place) {
-        let order = 0;
-        if ('order' in place) {
-            order = place.order;
-        }
-        let label = document.createElement('label');
-        if ('id' in create) {
-            label.id = create.id;
-        }
-        if ('class' in create) {
-            label.className = create.class;
-        }
-
-        if ('place' in place) {
-            LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(label);
-        }
-    }
-
-    span(create, place) {
-        let order = 0;
-        if ('order' in place) {
-            order = place.order;
-        }
-        let span = document.createElement('span');
-        if ('id' in create) {
-            span.id = create.id;
-        }
-        if ('class' in create) {
-            span.className = create.class;
-        }
-
-        if ('place' in place) {
-            LinearDOM.domStructure.querySelectorAll(place.place)[order].appendChild(span);
-        }
-    }
-
     overflow(place) {
         //console.log('Linear.js: Generate "Overflow"');
         if (place !== '') {
@@ -257,16 +99,41 @@ class LinearDOM_class extends Linear_class {
         }
     }
 
-    createElement(name, data, func) {
-        if (name === 'div') {
-            this.div(data);
-        }
+    createElement(name, props, children) {
+        if (name !== '' && name !== null && name !== undefined) {
+            let elem = document.createElement(name);
+            if (props !== null) {
+                if ('innerHTML' in props) {
+                    console.log("Linear.js: Error props can't contain innerHTML")
+                    return;
+                } else if ('innerText' in props) {
+                    console.log("Linear.js: Error props can't contain innerText")
+                    return;
+                } else {
+                    if ('action' in props) {
+                        elem.addEventListener(props.action.type, props.action.listener)
+                        delete props.action;
+                    }
+                    for (let key in props) {
+                        elem.setAttribute(key, props[key])
+                    }
+                }
+            }
 
-        if (name === 'title') {
-            let title = document.createElement('title');
-            let header = document.getElementsByTagName('head')[0];
-            title.innerHTML = data.children;
-            header.appendChild(title)
+            if (children !== null) {
+                if (typeof children === "string") {
+                    elem.innerText = children;
+                } else if (typeof children === "object") {
+                    if (String(children.outerHTML)[0] === '<') {
+                        elem.innerHTML = children.outerHTML;
+                    } else {
+                        for (let key in children) {
+                            elem.appendChild(children[key])
+                        }
+                    }
+                }
+            }
+            return elem;
         }
     }
 
