@@ -1,69 +1,109 @@
 import { Linear } from "../server/linear/Linear.js";
+import { Header } from "./components/Header.js";
+import { AllPageBlock } from "./components/AllPageBlock.js";
+import { BlocksPage } from "./components/AllBlockPages/BlocksPage.js";
+import { Footer } from "./components/Footer.js";
 //import { Router } from "../server/router/Router.js";
 
 export const App = () => {
-    return Linear.createElement('nav', {class: 'navbar navbar-expand-lg navbar-light bg-light'}, [
-        Linear.createElement('a', {class: 'navbar-brand', href: '/about'}, 'Navbar'),
-        Linear.createElement('button', {class: 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': "#navbarSupportedContent", 'aria-controls': "navbarSupportedContent", 'aria-expanded': "false", 'aria-label': "Toggle navigation"},
-            Linear.createElement('span', {class: 'navbar-toggler-icon'}, null)),
-        Linear.createElement('div', {class: 'collapse navbar-collapse', id: 'navbarSupportedContent'},[
-            Linear.createElement('ul', {class: 'navbar-nav mr-auto'}, [
-                Linear.createElement('li', {class: 'nav-item active'},
-                    Linear.createElement('a', {class: 'nav-link', href: '3'}, 'Home')),
-                Linear.createElement('li', {class: 'nav-item'},
-                    Linear.createElement('a', {class: 'nav-link', href: '3'}, 'Link')),
-                Linear.createElement('li', {class: 'nav-item dropdown'}, [
-                    Linear.createElement('a', {class: 'nav-link dropdown-toggle', href: '3', id: "navbarDropdown", role: "button", 'data-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false"}, 'Dropdown'),
-                    Linear.createElement('div', {class: "dropdown-menu", 'aria-labelledby': "navbarDropdown"}, [
-                        Linear.createElement('a', {class: 'dropdown-item', href: '#'}, 'Action'),
-                        Linear.createElement('a', {class: 'dropdown-item', href: '#'}, 'Another Action'),
-                        Linear.createElement('div', {class: 'dropdown-divider', href: '#'}, null),
-                        Linear.createElement('a', {class: 'dropdown-item', href: '#'}, 'Something else here'),
-                    ])
-                ]),
-                Linear.createElement('li', {class: 'nav-item'},
-                    Linear.createElement('a', {class: 'nav-link disabled', href: '3'}, 'Disabled')),
-            ]),
-            Linear.createElement('form', {class: 'form-inline my-2 my-lg-0'}, [
-                Linear.createElement('input', {class: "form-control mr-sm-2", type: "search", placeholder: "Search", 'aria-label': "Search"}, null),
-                Linear.createElement('button', {class: 'btn btn-outline-success my-2 my-sm-0', type: 'submit'}, 'Search')
-            ])
-        ])
-    ])
-}
-
-/*<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+    return [
+        Header(),
+        AllPageBlock(),
+        BlocksPage(),
+        Footer()
+    ]
+}/*
+<div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div className="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div className="my-3 py-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>*/
+        <div className="bg-light box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div className="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div className="my-3 p-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-dark box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div className="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div className="my-3 p-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-dark box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div className="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div className="my-3 py-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-light box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div className="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div className="my-3 p-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-white box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div className="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div className="my-3 py-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-white box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div className="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div className="my-3 p-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-white box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div className="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div className="my-3 py-3">
+            <h2 className="display-5">Another headline</h2>
+            <p className="lead">And an even wittier subheading.</p>
+        </div>
+        <div className="bg-white box-shadow mx-auto"
+             style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossOrigin="anonymous"></script>
+<script>window.jQuery || document.write('
+    <script src="../../assets/js/vendor/jquery-slim.min.js">
+        <
+        \/script>')
+    </script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script>
+        Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+    });
+    </script>
+</body>*/

@@ -27,8 +27,19 @@ class Linear_class {
             main.innerHTML = component.outerHTML;
         } else if (typeof component === "object") {
             for (let key in component) {
-                main.appendChild(component[key]);
+                if (String(component[key].outerHTML)[0] === '<') {
+                    main.appendChild(component[key]);
+                } else if (typeof component[key] === "object") {
+                    const comp = component[key];
+                    const freeDiv = document.createElement('div');
+                    for (let key in comp) {
+                        freeDiv.appendChild(comp[key]);
+                    }
+                    main.appendChild(freeDiv);
+                    //console.log(comp)
+                }
             }
+            //console.log(component[key])
         }
     }
 
