@@ -21,4 +21,4 @@ class Router_class {
     }
 }
 
-export var Router = new Router_class();
+export const Router = new Router_class();

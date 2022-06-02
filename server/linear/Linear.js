@@ -63,7 +63,7 @@ class LinearDOM_class extends Linear_class {
             order = element.order;
         }
         if ('place' in element) {
-            LinearDOM.domStructure.querySelectorAll(element.place)[order].addEventListener(eventType, function () {
+            this.domStructure.querySelectorAll(element.place)[order].addEventListener(eventType, function () {
                 if (Array.isArray(event.event)) {
                     let e = event.event[0];
                     if (event.id === undefined) {
