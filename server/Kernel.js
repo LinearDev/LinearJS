@@ -9,4 +9,4 @@ class Kernel_class {
     }
 }
 
-export var Kernel = new Kernel_class();
+export const Kernel = new Kernel_class();
