@@ -1,14 +1,15 @@
 import { Linear } from '../server/linear/Linear.js';
 import { Router } from '../server/router/Router.js';
-import {App} from "./App.js";
-import {About} from "./About.js";
+//import {App} from "./App.js";
+import { Test } from "./Test.js";
+import { About } from "./About.js";
 
 export const Index = () => {
 
     const structureFunc = [{
         uri: '/',
         constructor: () => {
-            Linear.setDOM(App());
+            Linear.setDOM(Test());
         }
     }, {
         uri: '/about',
