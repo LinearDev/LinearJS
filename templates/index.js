@@ -1,7 +1,7 @@
-import { Linear } from '../server/linear/Linear.js';
-import { Router } from '../server/router/Router.js';
-import {App} from "./App.js";
-import {About} from "./About.js";
+import { Linear } from '../modules/linear/Linear.js';
+import { Router } from '../modules/router/Router.js';
+import { App } from "./App.js";
+import { Docs } from "./Docs.js";
 
 export const Index = () => {
 
@@ -11,9 +11,9 @@ export const Index = () => {
             Linear.setDOM(App());
         }
     }, {
-        uri: '/about',
+        uri: '/docs',
         constructor: () => {
-            Linear.setDOM(About())
+            Linear.setDOM(Docs())
         }
     }]
     Router.container(structureFunc);

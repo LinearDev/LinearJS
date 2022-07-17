@@ -1,15 +1,10 @@
-import { Linear } from "../server/linear/Linear.js";
-import { Header } from "./components/Header.js";
-import { AllPageBlock } from "./components/AllPageBlock.js";
-import { BlocksPage } from "./components/AllBlockPages/BlocksPage.js";
-import { Footer } from "./components/Footer.js";
-//import { Router } from "../server/router/Router.js";
+import { Linear } from "../modules/linear/Linear.js";
+import { Layout } from "./components/Layout.js";
 
 export const App = () => {
-    return [
-        Header(),
-        AllPageBlock(),
-        BlocksPage(),
-        Footer()
-    ]
+    return Layout({children: Linear.createElement('div', {class: 'content-box'}, [
+            Linear.createElement('h1', {style: 'text-align: center'}, 'Are you happy?'),
+            Linear.createElement('h2', {style: 'text-align: center'}, "It's your own Linear.js based website")
+        ])
+    });
 }

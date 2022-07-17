@@ -2,11 +2,118 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Arial", Helvetica, sans-serif;
-    background-color: #212121;
+    background-color: #1d1d1d;
     font-size: 16px;
     color: #fff;
 }
 
 .root {
     color: #fff;
+}
+
+/* Custom css classes */
+.content-box {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    background-color: #1d1d1d;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    height: 25px;
+}
+
+.navbar-collapse {
+    flex: 0 1;
+}
+
+#nav-contact-btn {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    background-color: #ff752e;
+    border-radius: 10px;
+    padding: 5px 25px;
+    transition: .5s;
+}
+
+#nav-contact-btn:hover {
+    background-color: #fc6a21;
+    color: #fad2be;
+}
+
+a.nav-custom-link {
+    font-size: 18px;
+    margin: 0 20px;
+    color: #fff;
+    transition: .5s;
+    cursor: pointer;
+}
+
+a.nav-custom-link:hover {
+    color: #ff752e;
+}
+
+/* footer */
+.footerLogo img {
+    height: 15px;
+}
+
+.footer-content {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.foo-box {
+    width: 250px;
+}
+
+.foo-box p {
+    font-size: 20px;
+    margin-left: -1px;
+}
+
+.foo-links {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.foo-links a {
+    margin: 5px 0;
+    color: #a5a5a5;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.foo-links a:hover {
+    color: #6c6c6c;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 425px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .foo-box {
+        margin-top: 15px;
+    }
 }

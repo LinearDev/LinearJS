@@ -13,6 +13,10 @@ class Linear_class {
         //console.log(pageStr);
     }
 
+    renderJsx() {
+        console.log(this)
+    }
+
     return(content) {
         return `${content}`;
     }
@@ -25,6 +29,7 @@ class Linear_class {
         const main = this.domStructure.querySelector('.___main___');
         if (String(component.outerHTML)[0] === '<') {
             main.innerHTML = component.outerHTML;
+            console.log(component)
         } else if (typeof component === "object") {
             for (let key in component) {
                 if (String(component[key].outerHTML)[0] === '<') {
@@ -36,10 +41,9 @@ class Linear_class {
                         freeDiv.appendChild(comp[key]);
                     }
                     main.appendChild(freeDiv);
-                    //console.log(comp)
+                    console.log(comp)
                 }
             }
-            //console.log(component[key])
         }
     }
 
@@ -112,17 +116,17 @@ class LinearDOM_class extends Linear_class {
 
     createElement(name, props, children) {
         if (name !== '' && name !== null && name !== undefined) {
-            let elem = document.createElement(name);
+            const elem = document.createElement(name);
             if (props !== null) {
                 if ('innerHTML' in props) {
-                    console.log("Linear.js: Error props can't contain innerHTML")
+                    console.log("Linear.js: Error props can't contain innerHTML");
                     return;
                 } else if ('innerText' in props) {
-                    console.log("Linear.js: Error props can't contain innerText")
+                    console.log("Linear.js: Error props can't contain innerText");
                     return;
                 } else {
                     if ('action' in props) {
-                        elem.addEventListener(props.action.type, props.action.listener)
+                        elem.addEventListener(props.action.type, props.action.listener);
                         delete props.action;
                     }
                     for (let key in props) {
@@ -136,7 +140,7 @@ class LinearDOM_class extends Linear_class {
                     elem.innerText = children;
                 } else if (typeof children === "object") {
                     if (String(children.outerHTML)[0] === '<') {
-                        elem.innerHTML = children.outerHTML;
+                        elem.appendChild(children);
                     } else {
                         for (let key in children) {
                             elem.appendChild(children[key])
