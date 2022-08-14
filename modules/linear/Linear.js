@@ -29,7 +29,7 @@ class Linear_class {
         const main = this.domStructure.querySelector('.___main___');
         if (String(component.outerHTML)[0] === '<') {
             main.innerHTML = component.outerHTML;
-            console.log(component)
+            //console.log(component)
         } else if (typeof component === "object") {
             for (let key in component) {
                 if (String(component[key].outerHTML)[0] === '<') {
